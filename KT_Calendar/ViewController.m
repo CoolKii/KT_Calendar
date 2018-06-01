@@ -12,7 +12,8 @@
 #define ScreenW [UIScreen mainScreen].bounds.size.width
 #define ScreenH [UIScreen mainScreen].bounds.size.height
 
-@interface ViewController ()
+@interface ViewController ()<CalendarViewDelegate>
+@property (nonatomic,strong)CalendarView * calendarV;
 
 @end
 
@@ -21,17 +22,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    CalendarView * calendarV = [[CalendarView alloc] init];
-    calendarV.frame = CGRectMake(0, 50, ScreenW, 300);
-    [self.view addSubview:calendarV];
-    
-  
-    
+    [self.view addSubview:self.calendarV];
 }
 
+-(CalendarView *)calendarV{
+    if (!_calendarV) {
+        CalendarView * calendarView = [[CalendarView alloc] init];
+        calendarView.frame = CGRectMake(0, 50, ScreenW, 300);
+        calendarView.delegate = self;
+        _calendarV = calendarView;
+    }
+    return _calendarV;
+}
 
-
+#pragma mark - <CalendarViewDelegate>
+-(void)calendarDidSelectWithTime:(NSString *)yearMonthStr{
+    NSLog(@"选中~%@",yearMonthStr);
+}
 
 
 @end

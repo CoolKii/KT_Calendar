@@ -35,6 +35,10 @@
     [super layoutSubviews];
 }
 
+-(void)setSelected:(BOOL)selected{
+    self.dateLbl.textColor = selected?UIColor.orangeColor:UIColor.blackColor;
+}
+
 #pragma mark - UI
 - (void)createCellUI{
     _dateLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];

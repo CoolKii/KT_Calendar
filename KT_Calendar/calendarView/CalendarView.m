@@ -330,6 +330,11 @@
     self.selectDateLab.text = [dateArr lastObject];
     self.selectDayString = self.selectDateLab.text;
     self.selectWeekLab.text = [self getWeekDay:dateStr];
+    
+    //代理相应方法
+    if (self.delegate && [self.delegate respondsToSelector:@selector(calendarDidSelectWithTime:)]) {
+        [self.delegate calendarDidSelectWithTime:dateStr];
+    }
 }
 
 -(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
